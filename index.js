@@ -6,11 +6,7 @@ const routes = require('./app/routes');
 
 const app = express();
 
-const { User } = require('./app/models');
-
-// User.create({ name: 'Bruna', email: 'bruna@ela.pix.com.br', password: '123456' });
-
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.resolve('app', 'public')));
 
 nunjucks.configure(path.resolve('app', 'views'), {
   autoescape: true,
@@ -18,6 +14,7 @@ nunjucks.configure(path.resolve('app', 'views'), {
 });
 
 app.set('view engine', 'njk');
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', routes);
 app.listen(3000);
